@@ -33,17 +33,19 @@
         links.forEach(function(link) {
             link.source = nodes[link.source] ||
                 (nodes[link.source] = {name: link.source,
-                                        qualcosa: link.death_episode})
+                                        qualcosa: link.death_episode,
+                                        })
             link.target = nodes[link.target] ||
                 (nodes[link.target] = {name: link.target});
             link.value = +link.value;
         });
+        var width = window.innerWidth*0.8,
+            height = window.innerHeight*0.8;
         var hovercard = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0)
+            .attr("class", "hovercard")
+            .style("opacity", 0)     //set to 0 to start
             .style("width",400);
-        var width = innerWidth,
-            height = innerHeight;
+
 
         var force = d3.layout.force()
             .nodes(d3.values(nodes))
@@ -114,7 +116,7 @@
             .attr("r", 8)
             .style("fill", function (d) {
                 var ciao = d
-                   
+
                return colors[d.qualcosa]
             });
 
@@ -142,6 +144,7 @@
             node
                 .attr("transform", function(d) {
                     return "translate(" + d.x + "," + d.y + ")"; })
+
             path.on("mouseover", function(d) {
 
 
@@ -150,12 +153,10 @@
                     .style("opacity", 1);
 
                 var tip =
-                    "<h2>" + d.valuee+ "</h2>" +
+                    "<h2>" + d.source.name+ "</h2>" +
                     "<h4> " +d.execution +"</h4>";
-
-
                 hovercard.html(tip)
-                    .style("left", (d3.event.pageX) + "px")
+                    .style("left", 101 + "px")
                     .style("top", (d3.event.pageY) + "px");
 
             });
