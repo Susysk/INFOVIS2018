@@ -32,7 +32,8 @@
 // Compute the distinct nodes from the links.
         links.forEach(function(link) {
             link.source = nodes[link.source] ||
-                (nodes[link.source] = {name: link.source});
+                (nodes[link.source] = {name: link.source,
+                                        qualcosa: link.death_episode})
             link.target = nodes[link.target] ||
                 (nodes[link.target] = {name: link.target});
             link.value = +link.value;
@@ -96,13 +97,26 @@
             .enter().append("g")
             .attr("class", "node")
             .call(force.drag);
-
+        var c10 = d3.scale.category10();
 // add the nodes
+        path.attr("d", function(d) {
+            var dx = d.target.x - d.source.x,
+                dy = d.target.y - d.source.y,
+                dr = Math.sqrt(dx * dx + dy * dy);
+            return "M" +
+                d.source.x + "," +
+                d.source.y + "A" +
+                dr + "," + dr + " 0  0,1 " +
+                d.target.x + "," +
+                d.target.y;
+        });
         node.append("circle")
             .attr("r", 8)
             .style("fill", function (d) {
-                return colors[parseInt(d.death_episode)];
-            })
+                var ciao = d
+                   
+               return colors[d.qualcosa]
+            });
 
 
 // add the text
