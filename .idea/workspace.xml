@@ -20,8 +20,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+            <state relative-caret-position="201">
+              <caret line="120" column="55" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/deaths.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="4" lean-forward="true" selection-start-column="4" selection-end-column="4" />
+              <caret column="109" selection-start-column="109" selection-end-column="109" />
             </state>
           </provider>
         </entry>
@@ -41,11 +41,13 @@
     <findStrings>
       <find>8</find>
       <find>return d.</find>
-      <find>target</find>
       <find>source</find>
       <find>exec</find>
       <find>fill</find>
       <find>name</find>
+      <find>path</find>
+      <find>qualcosa</find>
+      <find>target</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -142,12 +144,12 @@
       <workItem from="1530540282176" duration="114000" />
       <workItem from="1530540415267" duration="1622000" />
       <workItem from="1530542620096" duration="9498000" />
-      <workItem from="1530641101171" duration="61000" />
+      <workItem from="1530641101171" duration="6951000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12831000" />
+    <option name="totallyTimeSpent" value="19721000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -250,14 +252,14 @@
     <entry file="file://$PROJECT_DIR$/deaths.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="4" lean-forward="true" selection-start-column="4" selection-end-column="4" />
+          <caret column="109" selection-start-column="109" selection-end-column="109" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        <state relative-caret-position="201">
+          <caret line="120" column="55" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
         </state>
       </provider>
     </entry>

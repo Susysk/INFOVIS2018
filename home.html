@@ -2,16 +2,31 @@
 <meta charset="utf-8">
 <script src="http://d3js.org/d3.v3.js"></script>
 <style>
-
+    .tooltip {
+        position: absolute;
+        max-width: 400px;
+        height: auto;
+        padding: 5px;
+        background-color: white;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none; /* MUY IMPORTANTE! */
+        font-family: sans-serif;
+        font-size:12px;
+    }
     path.link {
         fill: none;
         stroke: #666;
-        stroke-width: 1.5px;
+        stroke-width: 2px;
     }
 
     circle {
         stroke: #fff;
-        stroke-width: 1.5px;
+        stroke-width: 0.3px;
     }
 
     text {
@@ -22,6 +37,7 @@
 
 </style>
 <body>
+
 <script>
 
     // get the data
@@ -34,16 +50,17 @@
             link.source = nodes[link.source] ||
                 (nodes[link.source] = {name: link.source,
                                         qualcosa: link.death_episode,
+                    causa:link.execution,
                                         })
             link.target = nodes[link.target] ||
                 (nodes[link.target] = {name: link.target});
             link.value = +link.value;
         });
-        var width = window.innerWidth*0.8,
-            height = window.innerHeight*0.8;
+        var width = window.innerWidth,
+            height = window.innerHeight;
         var hovercard = d3.select("body").append("div")
-            .attr("class", "hovercard")
-            .style("opacity", 0)     //set to 0 to start
+            .attr("class", "tooltip")
+            .style("opacity", 0)
             .style("width",400);
 
 
@@ -51,7 +68,7 @@
             .nodes(d3.values(nodes))
             .links(links)
             .size([width, height])
-            .linkDistance(80)
+            .linkDistance(200)
             .charge(-300)
             .on("tick", tick)
             .start();
@@ -98,7 +115,35 @@
             .data(force.nodes())
             .enter().append("g")
             .attr("class", "node")
-            .call(force.drag);
+            .on("mouseover", function(d) {
+                if(d.name==1 || d.name==2|| d.name==3|| d.name==4|| d.name==5|| d.name==6|| d.name==7){
+                    var tip =
+                        "<h2> Season: "+d.name+"</h2>";
+                }
+                else {
+                    var tip =
+                        "<h2>  " + d.name + "</h2>" +
+                        "<h4> " + d.causa + "</h4>";
+                }
+                hovercard.transition()
+                    .duration(500)
+                    .style("opacity", 1);
+
+                hovercard.html(tip)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY) + "px");
+
+
+
+            })
+            .on("mouseout", function(d) {
+
+                hovercard.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
+            .call(force.drag)
+
         var c10 = d3.scale.category10();
 // add the nodes
         path.attr("d", function(d) {
@@ -118,17 +163,26 @@
                 var ciao = d
 
                return colors[d.qualcosa]
-            });
+            })
+
+        ;
+        svg.selectAll("circle")
+            .append("circle");
 
 
 // add the text
         node.append("text")
             .attr("x", 10)
             .attr("dy", ".35em")
-            .text(function(d) { return d.name; });
+
+            .text(function(d) { return d.name; })
+            .style("font-size", function(d) {return 2.4*d.qualcosa+1})
+            .style("fill", function(d) {return colors[d.qualcosa] })
+            ;
 
 // add the curvy lines
         function tick() {
+
             path.attr("d", function(d) {
                 var dx = d.target.x - d.source.x,
                     dy = d.target.y - d.source.y,
@@ -147,25 +201,25 @@
 
             path.on("mouseover", function(d) {
 
-
+               /* var tip =
+                    "<h2>" + d.source.name+ "</h2>" +
+                    "<h4> " +d.execution +"</h4>";
                 hovercard.transition()
                     .duration(500)
                     .style("opacity", 1);
 
-                var tip =
-                    "<h2>" + d.source.name+ "</h2>" +
-                    "<h4> " +d.execution +"</h4>";
                 hovercard.html(tip)
-                    .style("left", 101 + "px")
-                    .style("top", (d3.event.pageY) + "px");
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY) + "px");*/
 
-            });
+
+            })
         }
         path.on("mouseout", function(d) {
 
-            hovercard.transition()
+            /*hovercard.transition()
                 .duration(500)
-                .style("opacity", 0);
+                .style("opacity", 0);*/
         });
 
         node
